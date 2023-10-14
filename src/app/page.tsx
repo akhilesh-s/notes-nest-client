@@ -9,7 +9,7 @@ export default function HomePage() {
       <Head>
         <title>Hi</title>
       </Head>
-      <section className='bg-white'></section>
+      <section className='bg-white'>Hello</section>
     </main>
   );
 }
