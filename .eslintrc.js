@@ -13,7 +13,46 @@ module.exports = {
     'prettier',
   ],
   rules: {
-    'no-unused-vars': 'off',
+    // code conventions
+    'padding-line-between-statements': [
+      2,
+      {
+        blankLine: 'always',
+        prev: '*',
+        next: ['return', 'class', 'try', 'for', 'if', 'switch', 'while'],
+      },
+    ],
+    'no-var': 2,
+    'prefer-const': 2,
+    'prefer-template': 2,
+    'prefer-spread': 2,
+    'spaced-comment': 1,
+    'max-statements-per-line': 2,
+    'multiline-comment-style': 2,
+    'no-octal-escape': 0,
+    'react/react-in-jsx-scope': 0,
+    // react rules
+    'react/prop-types': 0,
+    'react/jsx-uses-react': 2,
+    'react/jsx-uses-vars': 2,
+    'react/no-typos': 2,
+    'react/jsx-no-duplicate-props': 2,
+    'react/jsx-pascal-case': 2,
+    'react/jsx-sort-props': 2,
+    'react/sort-prop-types': 2,
+    // To identify sx
+    'react/no-unknown-property': ['error', { ignore: ['sx'] }],
+    // import rules
+    'import/newline-after-import': [
+      2,
+      {
+        count: 1,
+      },
+    ],
+    'import/no-duplicates': 2,
+    'import/no-unresolved': 0,
+    'import/named': 0,
+    'import/no-named-as-default': 0,
     'no-console': 'warn',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'react/no-unescaped-entities': 'off',
@@ -24,7 +63,7 @@ module.exports = {
       { props: 'never', children: 'never' },
     ],
 
-    //#region  //*=========== Unused Import ===========
+    // #region  //*=========== Unused Import ===========
     '@typescript-eslint/no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'warn',
     'unused-imports/no-unused-vars': [
@@ -36,9 +75,9 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
-    //#endregion  //*======== Unused Import ===========
+    // #endregion  //*======== Unused Import ===========
 
-    //#region  //*=========== Import Sort ===========
+    // #region  //*=========== Import Sort ===========
     'simple-import-sort/exports': 'warn',
     'simple-import-sort/imports': [
       'warn',
@@ -75,7 +114,7 @@ module.exports = {
         ],
       },
     ],
-    //#endregion  //*======== Import Sort ===========
+    // #endregion  //*======== Import Sort ===========
   },
   globals: {
     React: true,

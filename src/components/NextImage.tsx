@@ -1,7 +1,7 @@
 import Image, { ImageProps } from 'next/image';
 import * as React from 'react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/twMerge';
 
 type NextImageProps = {
   useSkeleton?: boolean;
@@ -38,19 +38,19 @@ export default function NextImage({
 
   return (
     <figure
-      style={!widthIsSet ? { width: `${width}px` } : undefined}
       className={className}
+      style={!widthIsSet ? { width: `${width}px` } : undefined}
     >
       <Image
+        alt={alt}
         className={cn(
           classNames?.image,
           status === 'loading' && cn('animate-pulse', classNames?.blur)
         )}
+        height={height}
+        onLoadingComplete={() => setStatus('complete')}
         src={src}
         width={width}
-        height={height}
-        alt={alt}
-        onLoadingComplete={() => setStatus('complete')}
         {...rest}
       />
     </figure>
