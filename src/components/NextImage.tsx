@@ -30,7 +30,7 @@ export default function NextImage({
   className,
   classNames,
   ...rest
-}: NextImageProps) {
+}: NextImageProps): JSX.Element {
   const [status, setStatus] = React.useState(
     useSkeleton ? 'loading' : 'complete'
   );
