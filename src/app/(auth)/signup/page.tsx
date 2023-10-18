@@ -6,24 +6,32 @@ import logger from '@/lib/logger';
 import Utils from '@/lib/utils';
 
 const Signup = (): JSX.Element => {
-  const [username, setUsername] = useState('');
-  const [emailId, setEmailId] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmedPassword, setConfirmedPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+  const [signupData, setSignupData] = useState({
+    username: '',
+    emailId: '',
+    password: '',
+    confirmedPassword: '',
+  });
+
   const handleSignup = (): void => {
-    if (!username || !emailId || !password || !confirmedPassword) {
+    if (
+      !signupData.username ||
+      !signupData.emailId ||
+      !signupData.password ||
+      !signupData.confirmedPassword
+    ) {
       setErrorMessage('All fields are required.');
-    } else if (!Utils.isValidEmailId(emailId)) {
+    } else if (!Utils.isValidEmailId(signupData.emailId)) {
       setErrorMessage('Please Enter Valid Email Id');
-    } else if (password !== confirmedPassword) {
+    } else if (signupData.password !== signupData.confirmedPassword) {
       setErrorMessage('Passwords do not match.');
-    } else if (!Utils.isValidPassword(password)) {
+    } else if (!Utils.isValidPassword(signupData.password)) {
       setErrorMessage(
-        'Password should contain Minimum eight characters, at least one letter and one number: '
+        'Password should contain Minimum eight characters, at least one letter and one number and one special character: '
       );
-      logger('pwd', password);
+      logger('pwd', signupData.password);
     } else {
       setErrorMessage('');
       logger('User registered successfully!');
@@ -31,7 +39,7 @@ const Signup = (): JSX.Element => {
   };
 
   return (
-    <div className='container mx-auto p-4'>
+    <div className='m-4 mx-auto my-0 mt-2 flex max-w-sm flex-col justify-items-center rounded p-5 shadow-xl'>
       <h2 className='mb-4 text-2xl font-bold'>Signup</h2>
       <div className='mb-4'>
         <label
@@ -43,10 +51,15 @@ const Signup = (): JSX.Element => {
         <input
           className='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
           id='username'
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) =>
+            setSignupData((prev) => ({
+              ...prev,
+              username: e.target.value,
+            }))
+          }
           placeholder='Enter your username'
           type='text'
-          value={username}
+          value={signupData.username}
         />
       </div>
       <div className='mb-4'>
@@ -59,10 +72,15 @@ const Signup = (): JSX.Element => {
         <input
           className='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
           id='email'
-          onChange={(e) => setEmailId(e.target.value)}
+          onChange={(e) =>
+            setSignupData((prev) => ({
+              ...prev,
+              emailId: e.target.value,
+            }))
+          }
           placeholder='Enter your email'
           type='email'
-          value={emailId}
+          value={signupData.emailId}
         />
       </div>
       <div className='mb-4'>
@@ -75,10 +93,15 @@ const Signup = (): JSX.Element => {
         <input
           className='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
           id='password'
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) =>
+            setSignupData((prev) => ({
+              ...prev,
+              password: e.target.value,
+            }))
+          }
           placeholder='Enter your password'
           type='password'
-          value={password}
+          value={signupData.password}
         />
       </div>
       <div className='mb-6'>
@@ -91,10 +114,15 @@ const Signup = (): JSX.Element => {
         <input
           className='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
           id='confirmPassword'
-          onChange={(e) => setConfirmedPassword(e.target.value)}
+          onChange={(e) =>
+            setSignupData((prev) => ({
+              ...prev,
+              confirmedPassword: e.target.value,
+            }))
+          }
           placeholder='Confirm your password'
           type='password'
-          value={confirmedPassword}
+          value={signupData.confirmedPassword}
         />
       </div>
       {errorMessage && <p className='mb-4 text-red-500'>{errorMessage}</p>}

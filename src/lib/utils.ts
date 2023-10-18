@@ -17,9 +17,15 @@ export default class Utils {
     return false;
   }
 
+  /**
+   *
+   * @param pwd
+   * @returns true or false if password rules are followed or not
+   */
   static isValidPassword(pwd: string): boolean {
     if (pwd) {
-      const regex = /^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$/;
+      const regex =
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
       if (regex.test(pwd)) {
         return true;

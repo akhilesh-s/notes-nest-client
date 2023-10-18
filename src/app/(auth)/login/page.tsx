@@ -5,12 +5,14 @@ import logger from '@/lib/logger';
 import Utils from '@/lib/utils';
 
 const Login = (): JSX.Element => {
-  const [emailId, setEmailId] = useState('');
-  const [password, setPassword] = useState('');
+  const [loginData, setLoginData] = useState({
+    emailId: '',
+    password: '',
+  });
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = (): void => {
-    if (Utils.isValidEmailId(emailId)) {
+    if (Utils.isValidEmailId(loginData.emailId)) {
       logger('submit');
       setErrorMessage('');
     } else {
@@ -20,22 +22,32 @@ const Login = (): JSX.Element => {
   };
 
   return (
-    <section className='container mx-auto p-4'>
+    <div className='m-4 mx-auto my-0 mt-2 flex max-w-sm flex-col justify-items-center rounded p-5 shadow-xl'>
       <p className='mb-4 text-2xl font-bold'>Login</p>
       <form className='mx-auto max-w-md'>
         <input
           className='mb-4 w-full rounded border border-gray-300 p-2'
-          onChange={(e) => setEmailId(e.target.value)}
+          onChange={(e) =>
+            setLoginData((prev) => ({
+              ...prev,
+              emailId: e.target.value,
+            }))
+          }
           placeholder='Enter Username'
           type='text'
-          value={emailId}
+          value={loginData.emailId}
         />
         <input
           className='mb-4 w-full rounded border border-gray-300 p-2'
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) =>
+            setLoginData((prev) => ({
+              ...prev,
+              password: e.target.value,
+            }))
+          }
           placeholder='Enter Password'
           type='password'
-          value={password}
+          value={loginData.password}
         />
         <button
           className='rounded bg-blue-500 p-2 text-white hover:bg-blue-700'
@@ -48,7 +60,7 @@ const Login = (): JSX.Element => {
           <div className='mt-2 text-red-500'>{errorMessage}</div>
         )}
       </form>
-    </section>
+    </div>
   );
 };
 
