@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.userField {
+  border: 1px solid #6b7280;
+  padding: 8px 12px;
+}
+
+.passwordField {
+}
+
+.loginHeader {
+  @apply h-10;
+}

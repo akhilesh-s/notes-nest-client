@@ -115,6 +115,15 @@ module.exports = {
       },
     ],
     // #endregion  //*======== Import Sort ===========
+
+    '@typescript-eslint/explicit-function-return-type': [
+      'error',
+      {
+        allowExpressions: true, // Allows returning types on arrow functions and function expressions
+        allowTypedFunctionExpressions: true, // Allows returning types on typed function expressions
+        allowHigherOrderFunctions: true, // Allows returning types on higher-order functions
+      },
+    ],
   },
   globals: {
     React: true,
