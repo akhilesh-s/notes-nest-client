@@ -3,9 +3,24 @@
 import Head from 'next/head';
 import { useRouter } from 'next/navigation';
 import * as React from 'react';
+import { useEffect } from 'react';
+
+import { AuthService } from '@/services/authService';
 
 export default function HomePage(): JSX.Element {
   const router = useRouter();
+
+  useEffect(() => {
+    const checkLoggedInStatus = (): void => {
+      const loggedIn = AuthService.isLoggedIn();
+
+      if (!loggedIn) {
+        router.push('/login');
+      }
+    };
+
+    checkLoggedInStatus();
+  }, [router]);
 
   return (
     <main>
@@ -18,19 +33,7 @@ export default function HomePage(): JSX.Element {
         />
       </Head>
       <div className='max-sm mx-auto my-0 flex max-w-sm flex-col p-4'>
-        <p className='bg-white'>Notes Nest</p>
-        <button
-          className='focus:shadow-outline m-2 rounded  bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none'
-          onClick={() => router.push('/signup')}
-        >
-          Signup
-        </button>
-        <button
-          className='focus:shadow-outline m-2 rounded  bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none'
-          onClick={() => router.push('/login')}
-        >
-          Login
-        </button>
+        <p className='bg-white'>Note Nest HomePage</p>
       </div>
     </main>
   );
