@@ -1,12 +1,17 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 import logger from '@/lib/logger';
+import { Network } from '@/lib/network';
 import Utils from '@/lib/utils';
+
+import { UrlManager } from '@/provider/urlManager';
 
 const Signup = (): JSX.Element => {
   const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter();
 
   const [signupData, setSignupData] = useState({
     username: '',
@@ -15,7 +20,7 @@ const Signup = (): JSX.Element => {
     confirmedPassword: '',
   });
 
-  const handleSignup = (): void => {
+  const handleSignup = async (): Promise<void> => {
     if (
       !signupData.username ||
       !signupData.emailId ||
@@ -34,7 +39,28 @@ const Signup = (): JSX.Element => {
       logger('pwd', signupData.password);
     } else {
       setErrorMessage('');
-      logger('User registered successfully!');
+
+      try {
+        const url = UrlManager.getSignupUrl();
+        const data = {
+          email: signupData.emailId,
+          username: signupData.username,
+          password: signupData.password,
+        };
+        const payload = {
+          method: 'POST',
+        };
+
+        const res = await Network.fetch(url, payload, data);
+
+        if (res.ok) {
+          router.push('/login');
+        }
+
+        logger(res, 'User registered successfully!');
+      } catch {
+        setErrorMessage('Email or username already exists');
+      }
     }
   };
 
@@ -132,6 +158,13 @@ const Signup = (): JSX.Element => {
         type='button'
       >
         Signup
+      </button>
+      <button
+        className='focus:shadow-outline focus:outline-nones mt-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700'
+        onClick={() => router.push('/login')}
+        type='button'
+      >
+        Login
       </button>
     </div>
   );
