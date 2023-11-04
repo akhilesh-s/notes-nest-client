@@ -14,11 +14,12 @@ export default function withAuth(
   routeRole: RouteRole
 ): React.FC {
   const ComponentWithAuth: React.FC = (props) => {
-    const isLoggedIn = AuthService.isLoggedIn();
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+      const isLoggedIn = AuthService.isLoggedIn();
+
       if (routeRole === 'protected' && !isLoggedIn) {
         router.push('/login');
       } else if (routeRole === 'auth' && isLoggedIn) {
@@ -26,7 +27,7 @@ export default function withAuth(
       } else {
         setIsLoading(false);
       }
-    }, [router, isLoggedIn]);
+    }, [router]);
 
     if (!isLoading) {
       return <Component {...props} />;
