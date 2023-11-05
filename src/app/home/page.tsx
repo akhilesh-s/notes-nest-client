@@ -18,7 +18,7 @@ const Home = (): JSX.Element => {
       const data = {
         note: 'Note 1',
       };
-      const resp = await Network.axios(url, payload, data);
+      const resp = await Network.fetch(url, payload, data);
       logger(resp, 'response');
     } catch (error) {
       logger(error, 'request failed with error');

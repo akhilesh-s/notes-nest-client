@@ -33,7 +33,7 @@ const LoginPage = (): JSX.Element => {
           password: loginData.password,
         };
 
-        const resp = await Network.axios(url, payload, data);
+        const resp = await Network.fetch(url, payload, data);
 
         if (resp) {
           Utils.setCookie('isLoggedIn', true, 1);
