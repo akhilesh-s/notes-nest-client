@@ -25,7 +25,6 @@ const LoginPage = (): JSX.Element => {
 
         const payload = {
           method: 'POST',
-          credentials: 'include',
         };
 
         const data = {

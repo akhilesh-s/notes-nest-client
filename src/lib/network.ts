@@ -10,6 +10,7 @@ export class Network {
       options.body = JSON.stringify(data);
       options.headers = {
         ...options.headers,
+        credentials: 'include',
         'Content-Type': 'application/json',
         Accept: 'application/json',
       };

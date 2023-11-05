@@ -13,7 +13,7 @@ const Home = (): JSX.Element => {
   const handleSubmit = async (): Promise<void> => {
     try {
       const url = `${UrlManager.getBaseUrl()}/notesnest/addnote`;
-      const payload = { method: 'POST', credentials: 'include' };
+      const payload = { method: 'POST' };
 
       const data = {
         note: 'Note 1',
