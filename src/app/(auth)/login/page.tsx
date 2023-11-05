@@ -34,7 +34,7 @@ const LoginPage = (): JSX.Element => {
 
         const resp = await Network.fetch(url, payload, data);
 
-        if (resp.ok) {
+        if (resp) {
           Utils.setCookie('isLoggedIn', true, 1);
           router.push('/');
         }
@@ -50,4 +50,4 @@ const LoginPage = (): JSX.Element => {
   return <Login errorMessage={errorMessage} handleLogin={handleSubmit} />;
 };
 
-export default withAuth(LoginPage, 'auth');
+export default withAuth(LoginPage, 'all');
