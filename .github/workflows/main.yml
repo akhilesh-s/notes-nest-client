@@ -2,7 +2,7 @@ name: Check Old PRs and Notify Slack
 
 on:
   schedule:
-    - cron: "* * * * *" # Runs every minute for testing purposes; adjust as needed.
+    - cron: "30 23 * * *" # Runs every minute for testing purposes; adjust as needed.
 
 jobs:
   notify-old-prs:
